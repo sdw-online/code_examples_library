@@ -34,8 +34,9 @@ At the moment, the code examples are split into these directories:
 
 If you have any questions, suggestions, or just want to connect, find me on:
 
-- **LinkedIn**: [Stephen David-Williams](https://www.linkedin.com/in/stephen-david-williams/)
+- **LinkedIn**: [Stephen David-Williams](https://www.linkedin.com/in/stephen-david-williams-860428123/)
 - **TikTok**: [@sdw.online](https://www.tiktok.com/@sdw.online)
+- **YouTube**: [@sdw-online](https://www.youtube.com/@sdw-online/)
 - **Twitter/X**: [@sdw_online](https://www.twitter.com/sdw_online)
 - **Medium**: [@sdw-online](https://www.medium.com/@sdw-online)
 - **Instagram**: [@sdw.online](https://instagram.com/sdw.online)
@@ -49,7 +50,7 @@ I try to read and respond to as many messages and reach-outs as I can, so don't 
 
 This entire repo is subject to revision, meaning there will be changes made over time to optimize your experience here. 
 
-Let me know if you have any ideas to take this to another level - all feedback is welcome too!
+Let me know if there's anything you want to see on here, or something changed - all feedback and ideas are welcome here!
 
 
 ---

@@ -1,0 +1,9 @@
+data_source my_business_info:
+  type: postgres
+  connection: 
+    host: localhost
+    port: "5434"
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+  database: test_db
+  schema: business_data

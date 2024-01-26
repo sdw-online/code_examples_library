@@ -1,0 +1,22 @@
+checks for sales:
+  - row_count > 0
+  - missing_count(sale_id) = 0
+  - missing_count(product_id) = 0
+  - missing_count(quantity) = 0
+  - missing_count(sale_date) = 0
+  - missing_count(total_amount) = 0
+  - duplicate_count(sale_id) = 0
+  - max(total_amount) < 10000  
+  - freshness(sale_date) < 2d
+
+  - schema:
+      name: Confirm the required columns are present
+      fail: 
+        when required column missing: 
+          [sale_id, product_id, fake_column]
+
+  - avg_amount >= 10:
+      avg_amount query: |
+        SELECT AVG(total_amount)
+        FROM business_data.sales
+        WHERE sale_date BETWEEN '2024-01-10' AND '2024-01-14'

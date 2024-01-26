@@ -1,0 +1,43 @@
+dataset: sales
+columns:
+  - name: sale_id
+    data_type: integer
+    unique: true
+    not_null: true
+
+  - name: product_id
+    data_type: integer
+    not_null: true
+    reference:
+      dataset: products
+      column: product_id
+
+  - name: quantity
+    data_type: integer
+    not_null: true
+
+  - name: sale_date
+    data_type: date
+    not_null: true
+    
+  - name: total_amount
+    data_type: decimal
+    not_null: true
+    valid_min: 0
+    valid_max: 10000
+
+checks:
+  - row_count > 0
+  - missing_count(sale_id) = 0
+  - missing_count(product_id) = 0
+  - missing_count(quantity) = 0
+  - missing_count(sale_date) = 0
+  - missing_count(total_amount) = 0
+  - duplicate_count(sale_id) = 0
+  - max(total_amount) < 10000
+  - freshness(sale_date) < 2d
+  - avg_amount >= 10:
+      avg_amount query: |
+        SELECT AVG(total_amount)
+        FROM business_data.sales
+        WHERE sale_date BETWEEN '2024-01-10' AND '2024-01-14'

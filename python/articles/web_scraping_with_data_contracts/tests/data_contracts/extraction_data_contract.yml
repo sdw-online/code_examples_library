@@ -1,0 +1,54 @@
+dataset: scraped_fb_data
+
+columns:
+  - name: pos
+    data_type: integer
+    unique: true
+  - name: team
+    data_type: varchar
+    not_null: true
+  - name: p
+    data_type: integer
+    not_null: true
+  - name: w1
+    data_type: integer
+    not_null: true
+  - name: d1
+    data_type: integer
+    not_null: true
+  - name: l1
+    data_type: integer
+    not_null: true
+  - name: gf1
+    data_type: integer
+    not_null: true
+  - name: ga1
+    data_type: integer
+    not_null: true
+  - name: w2
+    data_type: integer
+    not_null: true
+  - name: d2
+    data_type: integer
+    not_null: true
+  - name: l2
+    data_type: integer
+    not_null: true
+  - name: gf2
+    data_type: integer
+    not_null: true
+  - name: ga2
+    data_type: integer
+    not_null: true
+  - name: gd
+    data_type: integer
+    not_null: true
+  - name: pts
+    data_type: integer
+    not_null: true
+  - name: date
+    data_type: date
+    not_null: true
+
+checks:
+  - row_count = 20

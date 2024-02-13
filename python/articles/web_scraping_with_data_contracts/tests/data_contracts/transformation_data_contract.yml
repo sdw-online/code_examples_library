@@ -1,0 +1,66 @@
+dataset: transformed_fb_data
+
+columns:
+  - name: position
+    data_type: integer
+    unique: true
+  - name: team_name
+    data_type: varchar
+    not_null: true
+  - name: games_played
+    data_type: integer
+    not_null: true
+  - name: wins
+    data_type: integer
+    not_null: true
+  - name: draws
+    data_type: integer
+    not_null: true
+  - name: losses
+    data_type: integer
+    not_null: true  
+  - name: goals_for
+    data_type: integer
+    not_null: true
+  - name: goals_against
+    data_type: integer
+    not_null: true
+  - name: goal_difference
+    data_type: integer
+    not_null: true
+  - name: points
+    data_type: integer
+    not_null: true
+    valid_min: 0  
+  - name: match_date
+    data_type: date
+    not_null: true
+
+checks:
+  - row_count = 20  # The table must contain 20 rows 
+  - min(games_played) >= 0  # Games played must be non-negative
+  - max(goal_difference) <= 100  # Replace 100 with your maximum goal difference value
+  - missing_count(team_name) = 0  # Ensure no missing team names
+  - failed rows:
+      name: No negative points permitted
+      fail query: |
+        SELECT team_name, points
+        FROM transformed_fb_data
+        WHERE points < 0
+  - failed rows:
+      name: Check Everton's points post-PSR penalty
+      fail query: |
+        WITH PrePointsDeduction AS (
+          SELECT SUM(points) as pre_penalty_points
+          FROM transformed_fb_data
+          WHERE team_name = 'Everton' AND match_date < '2023-11-01'
+        ), PostPointsDeduction AS (
+          SELECT SUM(points) as post_penalty_points
+          FROM transformed_fb_data
+          WHERE team_name = 'Everton' AND match_date >= '2023-11-01'
+        )
+        SELECT
+          (SELECT pre_penalty_points FROM PrePointsDeduction) as pre_penalty_points,
+          (SELECT post_penalty_points FROM PostPointsDeduction) as post_penalty_points,
+          (SELECT pre_penalty_points FROM PrePointsDeduction) - (SELECT post_penalty_points FROM PostPointsDeduction) as point_difference
+        WHERE (SELECT pre_penalty_points FROM PrePointsDeduction) - (SELECT post_penalty_points FROM PostPointsDeduction) < 10
